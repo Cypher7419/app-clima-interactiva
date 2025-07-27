@@ -9,13 +9,14 @@ body {
 }
 
 #map {
-    height: 65%;
+    flex-grow: 1; /* Permite que el mapa crezca para llenar el espacio disponible */
     width: 100%;
     background-color: #ccc;
+    min-height: 200px; /* Una altura mínima para que nunca desaparezca */
 }
 
 #info-container {
-    height: 35%;
+    flex-shrink: 0; /* Evita que el contenedor de información se encoja */
     padding: 20px;
     box-sizing: border-box;
     background-color: #ffffff;
