@@ -8,6 +8,7 @@ module.exports = async (req, res) => {
     if (!VERCEL_TOKEN) {
         return res.status(500).json({ error: "El token de Vercel no está configurado en el servidor." });
     }
+
     
     // Esta es la URL de la API de Vercel para obtener el uso de la cuenta.
     const USAGE_API_URL = 'https://api.vercel.com/v2/usage';
