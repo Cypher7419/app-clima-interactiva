@@ -1,17 +1,15 @@
 {
-  "name": "nieblaapp",
+  "name": "app-clima-interactiva",
   "version": "1.0.0",
-  "main": "script.js",
+  "description": "Una aplicación para consultar el clima y el riesgo de niebla.",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^5.1.0",
-    "node-fetch": "^2.7.0"
+    "node-fetch": "^2.6.7"
   }
 }
