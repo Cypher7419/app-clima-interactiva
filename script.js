@@ -211,7 +211,7 @@ function fetchWeatherData(lat, lon) {
                 fetchUsageStats();
                 
             } else {
-                throw new Error('La respuesta no contenía los datos del clima en el formato esperado (trendpro-1h).');
+                throw new Error('La respuesta no contenía los datos del clima en el formato esperado (trend_1h).');
             }
         })
         .catch(error => {
