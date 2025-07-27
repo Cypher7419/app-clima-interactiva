@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
 
     const VERCEL_TOKEN = process.env.VERCEL_AUTH_TOKEN;
 
-    // La prueba más importante: ¿Está la variable de entorno realmente llegando a la función?
+    // La prueba más importante: ¿Está la variable de entorno realmente llegando a la función???
     console.log("Valor de process.env.VERCEL_AUTH_TOKEN:", VERCEL_TOKEN);
     if (!VERCEL_TOKEN) {
         console.error("ERROR CRÍTICO: La variable de entorno VERCEL_AUTH_TOKEN no fue encontrada.");
