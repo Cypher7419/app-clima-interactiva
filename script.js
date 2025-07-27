@@ -58,7 +58,11 @@ function translatePictocode(code) {
  * Llama al proxy para obtener los datos del clima y los muestra.
  */
 function fetchWeatherData(lat, lon) {
-    const apiUrl = `http://localhost:3000/weather?lat=${lat}&lon=${lon}`;
+	// ANTES:
+	// const apiUrl = `http://localhost:3000/weather?lat=${lat}&lon=${lon}`;
+	// AHORA:
+	const apiUrl = `/api/weather?lat=${lat}&lon=${lon}`;
+
     fetchWeatherBtn.textContent = 'Obteniendo...';
     fetchWeatherBtn.disabled = true;
 

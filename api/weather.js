@@ -13,7 +13,11 @@ app.get('/weather', async (req, res) => {
         return res.status(400).json({ error_message: 'Faltan los parámetros de latitud y longitud' });
     }
 
-    const meteoblueApiKey = "luFVoSZWqHd3Kxc7";
+	// ANTES:
+	// const meteoblueApiKey = "luFVoSZWqHd3Kxc7";
+
+	// AHORA:
+	const meteoblueApiKey = process.env.METEOBLUE_API_KEY;
     
     // --- CAMBIO IMPORTANTE ---
     // Cambiamos 'basic-1h' por 'trend-1h' para que coincida con la nueva estructura de datos
