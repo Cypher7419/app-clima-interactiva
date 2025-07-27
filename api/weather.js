@@ -1,28 +1,19 @@
-const express = require('express');
+// Requerimos node-fetch para hacer la llamada a la API externa
 const fetch = require('node-fetch');
-const cors = require('cors');
 
-const app = express();
-const port = 3000;
-
-app.use(cors());
-
-app.get('/weather', async (req, res) => {
+// Esta es la función que Vercel ejecutará en cada llamada a /api/weather
+module.exports = async (req, res) => {
+    // Obtenemos latitud y longitud de los parámetros de la URL (?lat=...&lon=...)
     const { lat, lon } = req.query;
+
     if (!lat || !lon) {
+        // Si faltan parámetros, devolvemos un error
         return res.status(400).json({ error_message: 'Faltan los parámetros de latitud y longitud' });
     }
 
-	// ANTES:
-	// const meteoblueApiKey = "luFVoSZWqHd3Kxc7";
-
-	// AHORA:
-	const meteoblueApiKey = process.env.METEOBLUE_API_KEY;
-    
-    // --- CAMBIO IMPORTANTE ---
-    // Cambiamos 'basic-1h' por 'trend-1h' para que coincida con la nueva estructura de datos
-    // que incluye 'dewpointtemperature'.
-    const apiUrl = `https://my.meteoblue.com/packages/trendpro-1h?lat=${lat}&lon=${lon}&apikey=${meteoblueApiKey}`;
+    // Leemos la API key secreta desde las Variables de Entorno de Vercel
+    const meteoblueApiKey = process.env.METEOBLUE_API_KEY;
+    const apiUrl = `https://my.meteoblue.com/packages/trend-1h?lat=${lat}&lon=${lon}&apikey=${meteoblueApiKey}`;
 
     try {
         const meteoblueResponse = await fetch(apiUrl);
@@ -33,14 +24,11 @@ app.get('/weather', async (req, res) => {
             return res.status(400).json(data);
         }
         
+        // Si todo sale bien, enviamos los datos con un status 200 OK
         res.status(200).json(data);
 
     } catch (error) {
-        console.error('Error crítico en el proxy:', error);
-        res.status(500).json({ error_message: 'No se pudo contactar o procesar la respuesta del servicio de Meteoblue' });
+        console.error('Error crítico en la función de la API:', error);
+        res.status(500).json({ error_message: 'No se pudo contactar al servicio de Meteoblue' });
     }
-});
-
-app.listen(port, () => {
-    console.log(`Servidor proxy escuchando en http://localhost:${port}`);
-});
+};
