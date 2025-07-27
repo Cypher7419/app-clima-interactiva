@@ -3,27 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ClimaAPP</title>
+    <title>Clima en el Mapa</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="map"></div>
     <div id="info-container">
         <h2 id="location-name">Obteniendo ubicación...</h2>
-
-        <!-- CONTENEDOR AÑADIDO PARA EL RESUMEN DEL CLIMA -->
         <div id="weather-summary">
             <img id="weather-icon" src="" alt="Icono del Clima">
             <p id="weather-description">--</p>
         </div>
 
+        <!-- Contenedor prominente para el dato principal -->
+        <div id="fog-risk-container">
+            <span class="fog-risk-label">Riesgo de Niebla</span>
+            <span id="fog-risk">--</span>
+        </div>
+
+        <!-- Lista de datos secundarios (con el Punto de Condensación de vuelta) -->
         <div id="weather-data">
             <p><strong>Fecha y Hora:</strong> <span id="date-time">--</span></p>
             <p><strong>Temperatura:</strong> <span id="temperature">--</span></p>
+            <!-- LÍNEA CORREGIDA: Punto de Condensación está aquí -->
             <p><strong>Punto de Condensación:</strong> <span id="dew-point">--</span></p>
             <p><strong>Altitud:</strong> <span id="altitude">--</span></p>
-			<p><strong>Riesgo de Niebla:</strong> <span id="fog-risk">--</span></p>
         </div>
+        
         <button id="fetch-weather-btn">Obtener Datos del Clima</button>
     </div>
 

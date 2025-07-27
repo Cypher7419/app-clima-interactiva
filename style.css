@@ -84,3 +84,49 @@ h2 {
 #fetch-weather-btn:hover {
     background-color: #0056b3;
 }
+
+/* ... (todos tus estilos anteriores no cambian) ... */
+
+/* ESTILOS PARA EL NUEVO PANEL DE ESTADO */
+#fog-risk-container {
+    margin: 10px 0 20px 0; /* Espacio arriba y abajo */
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    transition: background-color 0.4s ease; /* Transición suave de color */
+    background-color: #e9ecef; /* Color por defecto (gris) */
+    color: #495057;
+}
+
+.fog-risk-label {
+    display: block; /* Para que ocupe su propia línea */
+    font-size: 0.9em;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+#fog-risk {
+    font-size: 2.2em; /* ¡Texto grande! */
+    font-weight: 700;  /* Negrita */
+}
+
+/* --- ESTADOS DE COLOR --- */
+#fog-risk-container.risk-yes {
+    background-color: #ffc107; /* Ámbar/Amarillo para "Sí" */
+    color: #343a40; /* Texto oscuro para buena legibilidad */
+}
+
+#fog-risk-container.risk-no {
+    background-color: #28a745; /* Verde para "No" */
+    color: white;             /* Texto blanco */
+}
+
+/* ESTILO PARA DE-ENFATIZAR LOS DATOS SECUNDARIOS */
+#weather-data p {
+    margin: 8px 0; /* Reducimos el margen un poco */
+    font-size: 1em; /* Reducimos el tamaño de fuente */
+    color: #6c757d;  /* Un gris más suave para el texto */
+    opacity: 0.9;
+}
+
+/* ... (el resto de tus estilos no cambian) ... */
