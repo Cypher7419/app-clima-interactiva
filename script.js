@@ -11,6 +11,7 @@ const dewPointElement = document.getElementById('dew-point');
 const altitudeElement = document.getElementById('altitude');
 const fogRiskContainer = document.getElementById('fog-risk-container');
 const fogRiskElement = document.getElementById('fog-risk');
+const internalStatsElement = document.getElementById('internal-stats');
 const fetchWeatherBtn = document.getElementById('fetch-weather-btn');
 
 let map, marker, currentLocation;
@@ -130,6 +131,26 @@ function findClosestTimeIndex(timeArray) {
 }
 
 /**
+ * Obtiene y muestra las estadísticas de uso de Vercel.
+ */
+async function fetchUsageStats() {
+    try {
+        const response = await fetch('/api/usage');
+        if (!response.ok) return;
+
+        const stats = await response.json();
+        
+        const invocationsText = `Ejecuciones: ${stats.invocations.used} / ${stats.invocations.limit}`;
+        const bandwidthText = `Ancho de banda: ${stats.bandwidth.used} / ${stats.bandwidth.limit}`;
+
+        internalStatsElement.textContent = `${invocationsText} | ${bandwidthText}`;
+    } catch (error) {
+        console.warn("No se pudieron cargar las estadísticas de uso:", error);
+        internalStatsElement.textContent = "Estadísticas de uso no disponibles.";
+    }
+}
+
+/**
  * Llama al proxy para obtener los datos del clima y los muestra en la interfaz.
  */
 function fetchWeatherData(lat, lon) {
@@ -186,8 +207,11 @@ function fetchWeatherData(lat, lon) {
                     fogRiskContainer.classList.add('risk-no');
                 }
                 
+                // Actualizar las estadísticas de uso al final
+                fetchUsageStats();
+                
             } else {
-                throw new Error('La respuesta no contenía los datos del clima en el formato esperado (trend_1h).');
+                throw new Error('La respuesta no contenía los datos del clima en el formato esperado (trendpro-1h).');
             }
         })
         .catch(error => {
@@ -214,6 +238,7 @@ function clearWeatherData() {
     altitudeElement.textContent = '--';
     fogRiskContainer.classList.remove('risk-yes', 'risk-no');
     fogRiskElement.textContent = '--';
+    internalStatsElement.textContent = ''; // Limpiar también las estadísticas
 }
 
 /**
@@ -225,4 +250,11 @@ fetchWeatherBtn.addEventListener('click', () => {
     } else {
         alert('Por favor, selecciona una ubicación en el mapa primero.');
     }
+});
+
+/**
+ * Cargar estadísticas al iniciar la app por primera vez (opcional pero recomendable)
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    fetchUsageStats();
 });

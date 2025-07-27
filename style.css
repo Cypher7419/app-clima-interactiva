@@ -129,4 +129,12 @@ h2 {
     opacity: 0.9;
 }
 
-/* ... (el resto de tus estilos no cambian) ... */
+/* ... Al final del archivo ... */
+#internal-stats {
+    font-size: 0.7em;
+    color: #adb5bd; /* Un gris muy suave */
+    text-align: center;
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #e9ecef;
+}
