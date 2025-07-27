@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
 
     // Leemos la API key secreta desde las Variables de Entorno de Vercel
     const meteoblueApiKey = process.env.METEOBLUE_API_KEY;
-    const apiUrl = `https://my.meteoblue.com/packages/trend-1h?lat=${lat}&lon=${lon}&apikey=${meteoblueApiKey}`;
+    const apiUrl = `https://my.meteoblue.com/packages/trendpro-1h?lat=${lat}&lon=${lon}&apikey=${meteoblueApiKey}`;
 
     try {
         const meteoblueResponse = await fetch(apiUrl);
