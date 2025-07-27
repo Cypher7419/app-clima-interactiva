@@ -4,31 +4,55 @@ body {
     padding: 0;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100vh; /* Ocupa el 100% de la altura de la ventana */
     background-color: #f0f2f5;
 }
 
 #map {
-    flex-grow: 1; /* Permite que el mapa crezca para llenar el espacio disponible */
+    /* MODIFICACIÓN CLAVE: El mapa ocupará exactamente el 50% de la altura de la pantalla */
+    height: 50%;
     width: 100%;
     background-color: #ccc;
-    min-height: 200px; /* Una altura mínima para que nunca desaparezca */
 }
 
 #info-container {
-    flex-shrink: 0; /* Evita que el contenedor de información se encoja */
+    /* MODIFICACIÓN CLAVE: El panel de datos ocupará el otro 50% */
+    height: 50%;
+    
+    /* Estas propiedades son las que evitan que el botón se pierda, las mantenemos */
     padding: 20px;
     box-sizing: border-box;
     background-color: #ffffff;
     border-top: 1px solid #ddd;
-    overflow-y: auto;
     display: flex;
     flex-direction: column;
+    overflow-y: auto; /* Permite scroll si el contenido es demasiado para pantallas pequeñas */
 }
 
 h2 {
     margin-top: 0;
     color: #333;
+}
+
+#weather-summary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    min-height: 40px;
+}
+
+#weather-icon {
+    width: 40px;
+    height: 40px;
+    display: none;
+}
+
+#weather-description {
+    font-size: 1.1em;
+    color: #555;
+    font-style: italic;
+    margin: 0;
 }
 
 #weather-data p {
@@ -42,9 +66,10 @@ h2 {
     color: #000;
 }
 
-/* ESTILOS PARA EL NUEVO BOTÓN */
 #fetch-weather-btn {
-    margin-top: auto; /* Empuja el botón hacia abajo */
+    /* MODIFICACIÓN CLAVE: Esta línea empuja el botón siempre hacia abajo */
+    margin-top: auto;
+    
     padding: 15px;
     font-size: 1em;
     font-weight: bold;
@@ -58,26 +83,4 @@ h2 {
 
 #fetch-weather-btn:hover {
     background-color: #0056b3;
-}
-
-/* ESTILOS AÑADIDOS PARA EL RESUMEN VISUAL DEL CLIMA */
-#weather-summary {
-    display: flex;         /* Pone el icono y el texto en la misma línea */
-    align-items: center;   /* Los centra verticalmente */
-    gap: 10px;             /* Un pequeño espacio entre el icono y el texto */
-    margin-bottom: 15px;   /* Espacio antes de los datos detallados */
-    min-height: 40px;      /* Evita que el layout salte al cargar el icono */
-}
-
-#weather-icon {
-    width: 40px;           /* Controla el tamaño del icono */
-    height: 40px;
-    display: none;         /* El icono estará oculto hasta que se carguen los datos */
-}
-
-#weather-description {
-    font-size: 1.1em;      /* Un tamaño de letra legible pero no enorme */
-    color: #555;           /* Un color de texto ligeramente más suave */
-    font-style: italic;    /* Un toque sutil para diferenciarlo */
-    margin: 0;             /* Quitamos los márgenes por defecto del párrafo */
 }
