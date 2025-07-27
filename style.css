@@ -1,0 +1,82 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f0f2f5;
+}
+
+#map {
+    height: 65%;
+    width: 100%;
+    background-color: #ccc;
+}
+
+#info-container {
+    height: 35%;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    border-top: 1px solid #ddd;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+#weather-data p {
+    margin: 10px 0;
+    font-size: 1.1em;
+    color: #555;
+}
+
+#weather-data span {
+    font-weight: bold;
+    color: #000;
+}
+
+/* ESTILOS PARA EL NUEVO BOTÓN */
+#fetch-weather-btn {
+    margin-top: auto; /* Empuja el botón hacia abajo */
+    padding: 15px;
+    font-size: 1em;
+    font-weight: bold;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#fetch-weather-btn:hover {
+    background-color: #0056b3;
+}
+
+/* ESTILOS AÑADIDOS PARA EL RESUMEN VISUAL DEL CLIMA */
+#weather-summary {
+    display: flex;         /* Pone el icono y el texto en la misma línea */
+    align-items: center;   /* Los centra verticalmente */
+    gap: 10px;             /* Un pequeño espacio entre el icono y el texto */
+    margin-bottom: 15px;   /* Espacio antes de los datos detallados */
+    min-height: 40px;      /* Evita que el layout salte al cargar el icono */
+}
+
+#weather-icon {
+    width: 40px;           /* Controla el tamaño del icono */
+    height: 40px;
+    display: none;         /* El icono estará oculto hasta que se carguen los datos */
+}
+
+#weather-description {
+    font-size: 1.1em;      /* Un tamaño de letra legible pero no enorme */
+    color: #555;           /* Un color de texto ligeramente más suave */
+    font-style: italic;    /* Un toque sutil para diferenciarlo */
+    margin: 0;             /* Quitamos los márgenes por defecto del párrafo */
+}

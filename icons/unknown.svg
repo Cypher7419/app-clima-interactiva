@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+    <defs>
+        <style>
+            .circle { fill: #c6d4db; }
+            .question { fill: #869aab; font-family: Arial, sans-serif; font-size: 32px; font-weight: bold; }
+        </style>
+    </defs>
+    <circle class="circle" cx="32" cy="32" r="28"/>
+    <text class="question" x="24" y="42">?</text>
+</svg>

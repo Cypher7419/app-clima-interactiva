@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClimaAPP</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="map"></div>
+    <div id="info-container">
+        <h2 id="location-name">Obteniendo ubicación...</h2>
+
+        <!-- CONTENEDOR AÑADIDO PARA EL RESUMEN DEL CLIMA -->
+        <div id="weather-summary">
+            <img id="weather-icon" src="" alt="Icono del Clima">
+            <p id="weather-description">--</p>
+        </div>
+
+        <div id="weather-data">
+            <p><strong>Fecha y Hora:</strong> <span id="date-time">--</span></p>
+            <p><strong>Temperatura:</strong> <span id="temperature">--</span></p>
+            <p><strong>Punto de Condensación:</strong> <span id="dew-point">--</span></p>
+            <p><strong>Altitud:</strong> <span id="altitude">--</span></p>
+        </div>
+        <button id="fetch-weather-btn">Obtener Datos del Clima</button>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBP2Jc-Gqy5Q6JTe0NCZcJlXJILl_GYMuI&callback=initMap" async defer></script>
+</body>
+</html>
