@@ -9,6 +9,7 @@ const dateTimeElement = document.getElementById('date-time');
 const temperatureElement = document.getElementById('temperature');
 const dewPointElement = document.getElementById('dew-point');
 const altitudeElement = document.getElementById('altitude');
+const fogRiskElement = document.getElementById('fog-risk'); // <-- 1. AÑADIMOS LA REFERENCIA
 const fetchWeatherBtn = document.getElementById('fetch-weather-btn');
 
 let map, marker, currentLocation;
@@ -16,11 +17,6 @@ let map, marker, currentLocation;
 function initMap() { if (navigator.geolocation) { navigator.geolocation.getCurrentPosition(position => { const userLocation = { lat: position.coords.latitude, lng: position.coords.longitude }; createMap(userLocation); updateLocationInfo(userLocation); }, () => { const defaultLocation = { lat: 40.416775, lng: -3.703790 }; createMap(defaultLocation); updateLocationInfo(defaultLocation); }); } else { const defaultLocation = { lat: 40.416775, lng: -3.703790 }; createMap(defaultLocation); updateLocationInfo(defaultLocation); } }
 function createMap(location) { map = new google.maps.Map(document.getElementById('map'), { center: location, zoom: 12 }); marker = new google.maps.Marker({ position: location, map: map, draggable: true }); google.maps.event.addListener(marker, 'dragend', () => updateLocationInfo(marker.getPosition().toJSON())); google.maps.event.addListener(map, 'click', event => { marker.setPosition(event.latLng); updateLocationInfo(event.latLng.toJSON()); }); }
 function updateLocationInfo(location) { currentLocation = location; clearWeatherData(); const geocoder = new google.maps.Geocoder(); geocoder.geocode({ 'location': location }, (results, status) => { if (status === 'OK') { locationNameElement.textContent = results[0] ? results[0].formatted_address : 'Ubicación no encontrada'; } else { locationNameElement.textContent = 'Buscando nombre...'; } }); }
-
-/**
- * Función auxiliar para traducir el pictocode a un icono y descripción.
- * ¡VERSIÓN CORREGIDA Y DEFINITIVA CON ICONO DE RESPALDO!
- */
 function translatePictocode(code) {
     const iconUrlBase = "icons/";
     let description = "Condición desconocida";
@@ -53,6 +49,38 @@ function translatePictocode(code) {
     };
 }
 
+
+// ==============================================================================
+// 2. FUNCIÓN DE CÁLCULO DEDICADA
+// ==============================================================================
+/**
+ * Calcula el riesgo de niebla basándose en la temperatura y el punto de condensación.
+ * @param {number} temperature - La temperatura en °C.
+ * @param {number} dewPoint - El punto de condensación en °C.
+ * @returns {string} - Devuelve "Sí", "No" o "Datos insuficientes".
+ */
+function calculateFogRisk(temperature, dewPoint) {
+    // Primero, nos aseguramos de tener datos válidos para calcular.
+    if (typeof temperature !== 'number' || typeof dewPoint !== 'number') {
+        return "Datos insuficientes";
+    }
+    // --- ¡AQUÍ VA TU LÓGICA DE CÁLCULO! ---
+    //
+    // Como marcador de posición, usaremos una regla meteorológica común:
+    // La niebla es muy probable cuando la diferencia (spread) entre la
+    // temperatura y el punto de condensación es menor a 2.5°C.
+    //
+    // **CUANDO TENGAS TU FÓRMULA DEFINITIVA, REEMPLAZA ESTE BLOQUE 'IF'.**
+    //
+    const spread = temperature - dewPoint;
+    const SPREAD_THRESHOLD = 2.5; // Umbral en °C
+
+    if (spread >= 0 && spread <= SPREAD_THRESHOLD) {
+        return "Sí";
+    } else {
+        return "No";
+    }
+}
 
 /**
  * Llama al proxy para obtener los datos del clima y los muestra.
@@ -102,6 +130,14 @@ function fetchWeatherData(lat, lon) {
                     weatherDescriptionElement.textContent = '';
                     weatherIconElement.style.display = 'none';
                 }
+
+                // ==============================================================================
+                // 3. LLAMAMOS A LA FUNCIÓN DE CÁLCULO Y MOSTRAMOS EL RESULTADO
+                // ==============================================================================
+                const fogRiskResult = calculateFogRisk(temperature, dewpoint);
+                fogRiskElement.textContent = fogRiskResult;
+
+
             } else {
                 throw new Error('La respuesta no contenía los datos del clima en el formato esperado (trend_1h).');
             }
@@ -125,6 +161,7 @@ function clearWeatherData() {
     temperatureElement.textContent = '--';
     dewPointElement.textContent = '--';
     altitudeElement.textContent = '--';
+    fogRiskElement.textContent = '--'; // <-- Limpiamos el nuevo campo    
 }
 
 fetchWeatherBtn.addEventListener('click', () => {
