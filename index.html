@@ -9,40 +9,25 @@
 <body>
     <div id="map"></div>
     <div id="info-container">
-        <!-- Título con el nombre del lugar -->
         <h2 id="location-name">Obteniendo ubicación...</h2>
-
-        <!-- Resumen visual del clima (icono y descripción) -->
         <div id="weather-summary">
             <img id="weather-icon" src="" alt="Icono del Clima">
             <p id="weather-description">--</p>
         </div>
-
-        <!-- Panel principal y destacado para el Riesgo de Niebla -->
         <div id="fog-risk-container">
             <span class="fog-risk-label">Riesgo de Niebla</span>
             <span id="fog-risk">--</span>
         </div>
-
-        <!-- Lista de datos secundarios de apoyo -->
         <div id="weather-data">
             <p><strong>Fecha y Hora:</strong> <span id="date-time">--</span></p>
             <p><strong>Temperatura:</strong> <span id="temperature">--</span></p>
             <p><strong>Punto de Condensación:</strong> <span id="dew-point">--</span></p>
             <p><strong>Altitud:</strong> <span id="altitude">--</span></p>
         </div>
-        
-        <!-- Etiqueta sutil para las estadísticas de uso -->
-        <div id="internal-stats"></div>
-
-        <!-- Botón principal de acción -->
         <button id="fetch-weather-btn">Obtener Datos del Clima</button>
     </div>
 
-    <!-- Scripts de la aplicación y de la API de Google Maps -->
     <script src="script.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBP2Jc-Gqy5Q6JTe0NCZcJlXJILl_GYMuI&callback=initMap" async defer></script>
-
-<!-- Pequeño cambio para forzar el redespliegue en Vercel #2 -->
 </body>
 </html>
